@@ -1,6 +1,6 @@
 ---
 title: "Модерен апартамент над културен център"
-price: "64 diamonds"
+price: "56х Блока Цинк"
 tags: ["old", "big", "city-center"]
 image: "static/img/apartment1/main.png"
 ---

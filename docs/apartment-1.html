@@ -8,28 +8,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Модерен апартамент над културен център</h1>
-            <p class="price"> 64 diamonds</p>
-        </header>
+<div class="container">
+    <nav class="top-nav">
+        <a href="/commune-of-apartments/index.html" class="back-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Назад към имотите
+        </a>
+    </nav>
 
-        <div class="image-wrapper">
-            <img src="static/img/apartment1/main.png" alt="Основна снимка">
+    <header>
+        <h1>Модерен апартамент над културен център</h1>
+        <p class="price">💎 56х Блока Цинк</p>
+    </header>
+
+    <div class="gallery-wrapper">
+        <div class="slider" id="main-slider">
+            <div class="slide"><img src="static/img/apartment1/main.png" alt="Main view"></div>
+
+            
+                <div class="slide"><img src="/commune-of-apartments/static/img/apartment1/arial-view.png" alt="Gallery image"></div>
+            
+                <div class="slide"><img src="/commune-of-apartments/static/img/apartment1/back-left.png" alt="Gallery image"></div>
+            
+                <div class="slide"><img src="/commune-of-apartments/static/img/apartment1/back-right.png" alt="Gallery image"></div>
+            
+                <div class="slide"><img src="/commune-of-apartments/static/img/apartment1/balcony-left.png" alt="Gallery image"></div>
+            
+                <div class="slide"><img src="/commune-of-apartments/static/img/apartment1/balcony-right.png" alt="Gallery image"></div>
+            
         </div>
 
-        <div class="tags">
-            
-                <span class="tag">old</span>
-            
-                <span class="tag">big</span>
-            
-                <span class="tag">city-center</span>
-            
-        </div>
+        <button class="slider-nav prev" onclick="moveSlider(-1)">&#10094;</button>
+        <button class="slider-nav next" onclick="moveSlider(1)">&#10095;</button>
 
-        <article class="content">
-            <h2>Описание</h2>
+        <div class="slider-counter"><span id="current-idx">1</span> / 6</div>
+    </div>
+
+    <div class="tags">
+        
+            <span class="tag">old</span>
+        
+            <span class="tag">big</span>
+        
+            <span class="tag">city-center</span>
+        
+    </div>
+
+    <article class="content">
+        <h2>Описание</h2>
 <p>Епидермус максимус, намира се над държавна библиотека „Корабче“ 
 и е с особен достъп.</p>
 <p>32 на 14</p>
@@ -41,13 +67,24 @@
 <li>Достъп до градина на покрива</li>
 <li>448 квадрата</li>
 </ul>
-<p><img alt="Отвън" src="/commune-of-apartments/static/img/apartment1/arial-view.png" />
-<img alt="Заден изглед - ляво" src="/commune-of-apartments/static/img/apartment1/back-left.png" />
-<img alt="Заден изглед - дясно" src="/commune-of-apartments/static/img/apartment1/back-right.png" />
-<img alt="Изглед от балкон - ляво" src="/commune-of-apartments/static/img/apartment1/balcony-left.png" />
-<img alt="Изглед от балкон - дясно" src="/commune-of-apartments/static/img/apartment1/balcony-right.png" /></p>
-        </article>
-    </div>
+    </article>
+</div>
+
+<script>
+    const slider = document.getElementById('main-slider');
+    const counter = document.getElementById('current-idx');
+
+    function moveSlider(direction) {
+        const slideWidth = slider.querySelector('.slide').clientWidth;
+        slider.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
+
+        // Update counter after a small delay for the scroll to finish
+        setTimeout(() => {
+            const current = Math.round(slider.scrollLeft / slideWidth) + 1;
+            counter.innerText = current;
+        }, 300);
+    }
+</script>
 
     <footer class="footer">
         <div class="footer-content">

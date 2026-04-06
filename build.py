@@ -2,6 +2,8 @@ import os
 import yaml
 import markdown
 from jinja2 import Environment, FileSystemLoader
+import re
+
 
 CONTENT_DIR = "content"
 OUTPUT_DIR = "docs"
@@ -66,6 +68,39 @@ def build():
 
     with open(os.path.join(OUTPUT_DIR, "explore.html"), "w") as f:
         f.write(explore_html)
+
+
+
+
+def parse_markdown(file_path):
+    with open(file_path, "r", encoding="utf-8") as f:
+        text = f.read()
+
+    if text.startswith("---"):
+        _, frontmatter, content = text.split("---", 2)
+        meta = yaml.safe_load(frontmatter)
+    else:
+        meta = {}
+        content = text
+
+    # 1. Extract all image URLs from the markdown content before converting to HTML
+    # This looks for markdown syntax like ![alt](url)
+    gallery_images = re.findall(r'!\[.*?\]\((.*?)\)', content)
+
+    # 2. Remove those images from the content so they don't show up under "Description"
+    content_cleaned = re.sub(r'!\[.*?\]\((.*?)\)', '', content)
+
+    html = markdown.markdown(content_cleaned, extensions=["extra"])
+
+    # Fix image paths for the gallery list
+    if BASE_URL != "/":
+        html = html.replace('src="static/', f'src="{BASE_URL}static/')
+        gallery_images = [img.replace('static/', f'{BASE_URL}static/') for img in gallery_images]
+
+    # Add the images to the meta dictionary so Jinja can see them
+    meta['gallery'] = gallery_images
+
+    return meta, html
 
 if __name__ == "__main__":
     build()
