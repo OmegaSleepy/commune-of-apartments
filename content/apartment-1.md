@@ -2,7 +2,7 @@
 title: "Модерен апартамент над културен център"
 price: "64 diamonds"
 tags: ["old", "big", "city-center"]
-image: "/static/img/apartment1/main.png"
+image: "static/img/apartment1/main.png"
 ---
 
 ## Описание
