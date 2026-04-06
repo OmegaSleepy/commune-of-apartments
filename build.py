@@ -6,7 +6,7 @@ from jinja2 import Environment, FileSystemLoader
 CONTENT_DIR = "content"
 OUTPUT_DIR = "docs"
 TEMPLATES_DIR = "templates"
-BASE = "/commune-of-apartments/"
+BASE_URL = "/commune-of-apartments/"
 
 env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
 template = env.get_template("listing.html")
@@ -27,6 +27,10 @@ def parse_markdown(file_path):
 
     html = markdown.markdown(content, extensions=["extra"])
 
+    # Fix image paths
+    if BASE_URL != "/":
+        html = html.replace('src="static/', f'src="{BASE_URL}static/')
+
     return meta, html
 
 def build():
@@ -42,7 +46,7 @@ def build():
         slug = file.replace(".md", "")
         output_path = os.path.join(OUTPUT_DIR, f"{slug}.html")
 
-        page = template.render(meta=meta, content=html)
+        page = template.render(meta=meta, content=html, base=BASE_URL)
 
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(page)
@@ -51,14 +55,14 @@ def build():
         listings.append(meta)
 
     # Build index
-    index_html = index_template.render(listings=listings)
+    index_html = index_template.render(listings=listings, base=BASE_URL)
 
     with open(os.path.join(OUTPUT_DIR, "index.html"), "w") as f:
         f.write(index_html)
 
     explore_template = env.get_template("explore.html")
 
-    explore_html = explore_template.render(listings=listings)
+    explore_html = explore_template.render(listings=listings, base=BASE_URL)
 
     with open(os.path.join(OUTPUT_DIR, "explore.html"), "w") as f:
         f.write(explore_html)
