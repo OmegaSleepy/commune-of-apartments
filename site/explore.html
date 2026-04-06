@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Explore</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Explore Listings</h1>
+
+<input type="text" id="search" placeholder="Filter by tag...">
+
+<div class="grid" id="grid">
+    
+    <div class="card" data-tags="old,big,city-center">
+        <div class="image-wrapper">
+            <img src="/static/img/apartment1/main.png">
+        </div>
+        <h2>Модерен апартамент над културен център</h2>
+        <p>64 diamonds</p>
+    </div>
+    
+</div>
+
+<script>
+document.getElementById("search").addEventListener("input", function() {
+    let value = this.value.toLowerCase();
+
+    document.querySelectorAll(".card").forEach(card => {
+        let tags = card.dataset.tags.toLowerCase();
+
+        card.style.display = tags.includes(value) ? "block" : "none";
+    });
+});
+</script>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p>📩 Contact: <a href="mailto:m.v.georgiev2307@gmail.com">m.v.georgiev2307@gmail.com</a></p>
+        <p>💬 Or: "If you know my Discord, there"</p>
+    </div>
+</footer>
+
+</body>
+</html>

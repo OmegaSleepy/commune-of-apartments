@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ meta.title }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ meta.title }}</h1>
+        <p class="price">{{ meta.price }}</p>
+
+        <div class="image-wrapper">
+            <img src="{{ meta.image }}">
+        </div>
+
+        <div class="tags">
+            {% for tag in meta.tags %}
+                <span class="tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="content">
+            {{ content | safe }}
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>📩 Contact: <a href="mailto:m.v.georgiev2307@gmail.com">m.v.georgiev2307@gmail.com</a></p>
+            <p>💬 Or: "If you know my Discord, there"</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minecraft Real Estate</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1 class="title">🏢 Minecraft Real Estate</h1>
+
+    <div class="grid">
+        {% for listing in listings %}
+        <a href="{{ listing.slug }}.html" class="card">
+            <div class="image-wrapper">
+                <img src="{{ listing.image }}">
+            </div>
+            <h2>{{ listing.title }}</h2>
+            <p>{{ listing.price }}</p>
+        </a>
+        {% endfor %}
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>📩 Contact: <a href="mailto:m.v.georgiev2307@gmail.com">m.v.georgiev2307@gmail.com</a></p>
+            <p>💬 Or: "If you know my Discord, there"</p>
+        </div>
+    </footer>
+
+</body>
+</html>
