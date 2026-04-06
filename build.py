@@ -6,6 +6,7 @@ from jinja2 import Environment, FileSystemLoader
 CONTENT_DIR = "content"
 OUTPUT_DIR = "docs"
 TEMPLATES_DIR = "templates"
+BASE = "/commune-of-apartments/"
 
 env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
 template = env.get_template("listing.html")
