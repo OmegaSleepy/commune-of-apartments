@@ -4,7 +4,7 @@ import markdown
 from jinja2 import Environment, FileSystemLoader
 
 CONTENT_DIR = "content"
-OUTPUT_DIR = "site"
+OUTPUT_DIR = "docs"
 TEMPLATES_DIR = "templates"
 
 env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
